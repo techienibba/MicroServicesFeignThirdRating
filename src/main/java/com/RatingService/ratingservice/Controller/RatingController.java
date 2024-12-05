@@ -3,6 +3,7 @@ package com.RatingService.ratingservice.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ public class RatingController {
 	List<Ratings> ratinglist;
 	
 	@GetMapping
+	@PreAuthorize("hasRole='ADMIN'")
 	public List<Ratings> getratings()
 	{
 		rating1 = new Ratings();
@@ -50,6 +52,7 @@ public class RatingController {
 	}
 	
 	@GetMapping("/{ratingid}")
+	@PreAuthorize("hasRole='ADMIN'||hasRole='USER'")
 	public Ratings getratingbyid(@PathVariable("ratingid") int ratingid)
 	{
 		rating1 = new Ratings();
